@@ -1,0 +1,187 @@
+        for o in objectList:
+            if o != self and self.suicideAttack != 1:
+                self.areaList.append((o.x,o.y))
+                actualDistanceFromTarget = math.hypot(o.x-self.x,o.y-self.y)
+                if actualDistanceFromTarget <= self.width + 38 and self.runTimer == 0:
+                    self.confirmationCheck = 0
+                    self.runTimer = 6
+                    self.randomNum = 0
+                if self.runTimer >= 1:
+                    self.runTimer -= 1
+                    if self.randomNum == 0:
+                        self.randomNum = random.randint(1,3)
+                    if o.x > self.x and abs(o.y - self.y) <= abs(o.x - self.x): #ENEMY IS TO THE RIGHT
+                        if self.randomNum == 1:
+                            self.left = True
+                            self.down = False
+                            self.up = False
+                            self.right = False
+                            for o in objectList:
+                                if o.x - breadth < self.x - self.speed and o.x + breadth > self.x - self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+
+
+                            if self.x - self.speed >= 0 and self.confirmationCheck != 1:
+                                self.x -= self.speed
+                            else:
+                                self.randomNum = 0
+
+                        elif self.randomNum == 2:
+                            self.left = False
+                            self.down = True
+                            self.up = False
+                            self.right = False
+                            for o in objectList:
+                                if o.y - breadth > self.y + self.speed and o.y + breadth < self.y + self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+                            if self.y + self.speed + self.height <= winHeight and self.confirmationCheck != 1:
+                                self.y += self.speed
+                            else:
+                                self.randomNum = 0
+                        else:
+                            self.up = True
+                            self.down = False
+                            self.left = False
+                            self.right = False
+                            for o in objectList:
+                                if o.y + breadth > self.y - self.speed and o.y - breadth < self.y - self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+                            
+                            if self.y - self.speed >= 0 and self.confirmationCheck != 1:
+                                self.y -= self.speed
+                            else:
+                                self.randomNum = 0
+                        return
+                    elif o.x < self.x and abs(o.y - self.y) <= abs(o.x - self.x): #ENEMY IS TO THE LEFT
+                        if self.randomNum == 1:
+                            self.left = False
+                            self.down = False
+                            self.up = False
+                            self.right = True
+                            for o in objectList:
+                                if o.x - breadth < self.x + self.speed and o.x + breadth > self.x + self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+                            if self.x + self.speed  + self.width <= winWidth and self.confirmationCheck != 1:
+                                self.x += self.speed
+                            else:
+                                self.randomNum = 0
+
+                        elif self.randomNum == 2:
+                            self.left = False
+                            self.down = True
+                            self.up = False
+                            self.right = False
+                            for o in objectList:
+                                if o.y - breadth > self.y + self.speed and o.y + breadth < self.y + self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+                            if self.y + self.speed + self.height <= winHeight and self.confirmationCheck != 1:
+                                self.y += self.speed
+                            else:
+                                self.randomNum = 0
+                        else:
+                            self.up = True
+                            self.down = False
+                            self.left = False
+                            self.right = False
+                            for o in objectList:
+                                if o.y + breadth > self.y - self.speed and o.y - breadth < self.y - self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+                            if self.y - self.speed >= 0 and self.confirmationCheck != 1:
+                                self.y -= self.speed
+                            else:
+                                self.randomNum = 0
+                        return
+
+                    elif o.y < self.y and abs(o.y - self.y) >= abs(o.x - self.x): #ABOVE
+                        if self.randomNum == 1:
+                            self.left = True
+                            self.down = False
+                            self.up = False
+                            self.right = False
+                            for o in objectList:
+                                if o.x - breadth < self.x - self.speed and o.x + breadth > self.x - self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+                            if self.x - self.speed >= 0 and self.confirmationCheck != 1:
+                                self.x -= self.speed
+                            else:
+                                self.randomNum = 0
+
+                        elif self.randomNum == 2:
+                            self.left = False
+                            self.down = True
+                            self.up = False
+                            self.right = False
+                            for o in objectList:
+                                if o.y - breadth > self.y + self.speed and o.y + breadth < self.y + self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+                            
+                            if self.y + self.speed + self.height <= winHeight and self.confirmationCheck != 1:
+                                self.y += self.speed
+                            else:
+                                self.randomNum = 0
+                        else:
+                            self.up = False
+                            self.down = False
+                            self.left = False
+                            self.right = True
+                            for o in objectList:
+                                if o.x - breadth < self.x + self.speed and o.x + breadth > self.x + self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+                            if self.x + self.speed + self.width <= winWidth and self.confirmationCheck != 1:
+                                self.x += self.speed
+                            else:
+                                self.randomNum = 0
+                        return
+                    elif o.y > self.y and abs(o.y - self.y) >= abs(o.x - self.x): #BELOW
+                        if self.randomNum == 1:
+                            self.left = True
+                            self.down = False
+                            self.up = False
+                            self.right = False
+                            for o in objectList:
+                                if o.x - breadth < self.x - self.speed and o.x + breadth > self.x - self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+                            if self.x - self.speed >= 0 and self.confirmationCheck != 1:
+                                self.x -= self.speed
+                            else:
+                                self.randomNum = 0
+
+                        elif self.randomNum == 2:
+                            self.left = False
+                            self.down = False
+                            self.up = True
+                            self.right = False
+                            for o in objectList:
+                                if o.y + breadth > self.y - self.speed and o.y - breadth < self.y - self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+                            if self.y - self.speed - self.height >= 0 and self.confirmationCheck != 1:
+                                self.y -= self.speed
+                            else:
+                                self.randomNum = 0
+                        else:
+                            self.up = False
+                            self.down = False
+                            self.left = False
+                            self.right = True
+                            for o in objectList:
+                                if o.x - breadth < self.x + self.speed and o.x + breadth > self.x + self.speed:
+                                    self.confirmationCheck = 1
+                                    break
+                            if self.x + self.speed + self.width <= winWidth and self.confirmationCheck != 1:
+                                self.x += self.speed
+                            else:
+                                self.randomNum = 0
+                        return
+                else:
+                    self.randomNum = 0
